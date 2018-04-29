@@ -86,9 +86,11 @@ namespace AnxPro.Api
             // Setup request.
             var urlEncodedArgs = UrlEncode(args);
 
-            var address = string.Format("{0}/{1}/{2}?{3}", _url, _version, requestUrl, urlEncodedArgs);
-
-            var req = new HttpRequestMessage(HttpMethod.Get, address);
+            var req = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(_httpClient.BaseAddress, string.Format("{0}?{1}", requestUrl, urlEncodedArgs))
+            };
 
             // Send request and deserialize response.
             return await SendRequestAsync<T>(req).ConfigureAwait(false);
