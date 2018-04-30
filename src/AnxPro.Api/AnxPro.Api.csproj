@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <Version>0.1.0-alpha</Version>
-    <FileVersion>0.1.0.0</FileVersion>
+    <Version>0.1.1-alpha</Version>
+    <FileVersion>0.1.1.0</FileVersion>
     <Authors>rob_johnston</Authors>
     <Company>rob_johnston</Company>
     <Description>A .Net Standard client for the ANXPRO cryptocurrency API.</Description>
@@ -13,6 +13,7 @@
     <RepositoryUrl>https://github.com/RobJohnston/AnxPro.Api</RepositoryUrl>
     <PackageTags>api-client; cryptocurrency; bitcoin; litecoin; dogecoin; stellar; ripple; anxpro</PackageTags>
     <PackageReleaseNotes>First alpha release.</PackageReleaseNotes>
+    <AssemblyVersion>0.1.1.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>

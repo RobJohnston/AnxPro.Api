@@ -37,9 +37,20 @@ namespace AnxPro.Api
         /// </summary>
         public AnxProClient()
         {
-            _url = "https://anxpro.com/api";
+            _url = "https://anxpro.com/api/";
             _version = "3";
-            _httpClient.BaseAddress = new Uri(string.Format("{0}/{1}/", _url, _version));
+            _httpClient.BaseAddress = new Uri(string.Format("{0}{1}/", _url, _version));
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AnxProClient"/> class for calling public functions.
+        /// </summary>
+        /// <param name="version">The API version.  Default is "3".</param>
+        /// <remarks>This constructor was added to call the API v2 market data endpoints.</remarks>
+        public AnxProClient(string version) : this()
+        {
+            _version = version ?? "3";
+            _httpClient.BaseAddress = new Uri(string.Format("{0}{1}/", _url, _version));
         }
 
         /// <summary>
