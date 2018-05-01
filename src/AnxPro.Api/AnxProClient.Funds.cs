@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AnxPro.Api.Models;
 
@@ -31,7 +32,23 @@ namespace AnxPro.Api
         /// </returns>
         public async Task<SendResponse> SendAsync(string ccy, string address, string otp, decimal amount, string destinationTag = "")
         {
-            throw new NotImplementedException();
+            var args = new Dictionary<string, string>(4)
+            {
+                ["ccy"] = ccy,
+                ["address"] = address,
+                ["otp"] = otp,
+                ["amount"] = amount.ToString(_culture),
+            };
+
+            if (destinationTag != string.Empty)
+            {
+                args.Add("destinationTag", destinationTag);
+            }
+
+            return await QueryPrivateAsync<SendResponse>(
+                "send",
+                args
+            );
         }
 
         /// <summary>
@@ -45,7 +62,20 @@ namespace AnxPro.Api
         /// <returns></returns>
         public async Task<ReceiveResponse> ReceiveAsync(string ccy, Guid? subAccount)
         {
-            throw new NotImplementedException();
+            var args = new Dictionary<string, string>(1)
+            {
+                ["ccy"] = ccy,
+            };
+
+            if (subAccount.HasValue)
+            {
+                args.Add("subAccount", subAccount.Value.ToString());
+            }
+
+            return await QueryPrivateAsync<ReceiveResponse>(
+                "receive",
+                args
+            );
         }
 
         /// <summary>
@@ -61,7 +91,20 @@ namespace AnxPro.Api
         /// <returns></returns>
         public async Task<ReceiveResponse> CreateReceiveAddressAsync(string ccy, Guid? subAccount)
         {
-            throw new NotImplementedException();
+            var args = new Dictionary<string, string>(1)
+            {
+                ["ccy"] = ccy,
+            };
+
+            if (subAccount.HasValue)
+            {
+                args.Add("subAccount", subAccount.Value.ToString());
+            }
+
+            return await QueryPrivateAsync<ReceiveResponse>(
+                "receive/create",
+                args
+            );
         }
     }
 }
