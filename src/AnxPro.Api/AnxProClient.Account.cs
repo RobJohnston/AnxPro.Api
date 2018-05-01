@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AnxPro.Api.Models;
 
@@ -36,9 +37,16 @@ namespace AnxPro.Api
         public async Task<SubAccountResponse> CreateSubAccountAsync(string ccy, string customRef)
         {
             if (customRef == "DEFAULT" || customRef == "default")
-                throw new ArgumentException("(NOTE: please do not name your subaccount as \"DEFAULT\" or \"default\", these two key words are reserved.)");
+                throw new ArgumentException("Do not name your subaccount as \"DEFAULT\" or \"default\".  These two keywords are reserved.");
 
-            throw new NotImplementedException();
+            return await QueryPrivateAsync<SubAccountResponse>(
+                "subaccount/new",
+                new Dictionary<string, string>(2)
+                {
+                    ["ccy"] = ccy,
+                    ["customRef"] = customRef,
+                }
+            );
         }
     }
 }
