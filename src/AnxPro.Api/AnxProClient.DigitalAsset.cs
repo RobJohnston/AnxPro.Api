@@ -42,7 +42,14 @@ namespace AnxPro.Api
         /// <returns></returns>
         public async Task<CheckAddressResponse> CheckAddressAsync(string ccy, string address)
         {
-            throw new NotImplementedException();
+            return await QueryPrivateAsync<CheckAddressResponse>(
+                "address/check",
+                new Dictionary<string, string>(2)
+                {
+                    ["ccy"] = ccy,
+                    ["address"] = address,
+                }
+            );
         }
     }
 }
