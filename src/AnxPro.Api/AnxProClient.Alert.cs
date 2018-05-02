@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AnxPro.Api.Models;
 
@@ -16,7 +17,15 @@ namespace AnxPro.Api
         /// <returns></returns>
         public async Task<AlertResponse> CreateAlertAsync(string ccyPair, decimal limitPrice, AlertType type)
         {
-            throw new NotImplementedException();
+            return await QueryPrivateAsync<AlertResponse>(
+                "alert/create",
+                new Dictionary<string, string>(3)
+                {
+                    ["ccyPair"] = ccyPair,
+                    ["limitPrice"] = limitPrice.ToString(_culture),
+                    ["type"] = type.ToString(),
+                }
+            );
         }
 
         /// <summary>
@@ -26,7 +35,13 @@ namespace AnxPro.Api
         /// <returns>ResultCode OK</returns>
         public async Task<string> DeleteAlertAsync(Guid uuid)
         {
-            throw new NotImplementedException();
+            return await QueryPrivateAsync<string>(
+                "alert/delete",
+                new Dictionary<string, string>(1)
+                {
+                    ["uuid"] = uuid.ToString(),
+                }
+            );
         }
 
         /// <summary>
@@ -35,7 +50,10 @@ namespace AnxPro.Api
         /// <returns></returns>
         public async Task<AlertsResponse> GetAlertsAsync()
         {
-            throw new NotImplementedException();
+            return await QueryPrivateAsync<AlertsResponse>(
+                "alert/list",
+                null
+            );
         }
     }
 }
