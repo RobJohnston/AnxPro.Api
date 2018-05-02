@@ -7,7 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## 0.1.2 2018-05-01
 ### Added
 - Account method to create new subaccount.
-- Alert methods (create, delete, list.)
+- Alert methods (create, delete, list).
+- Authentication methods (get api key, create api key, get data token).
 
 ## 0.1.1 - 2018-04-30
 ### Added

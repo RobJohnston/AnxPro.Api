@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AnxPro.Api.Models;
 
@@ -21,32 +22,38 @@ namespace AnxPro.Api
         /// <returns></returns>
         public async Task<ApiKeyResponse> GetApiKeyAsync(string username, string password, bool allowMoveFund, string deviceId, string otp = "")
         {
-            throw new NotImplementedException();
-            //return await QueryPrivateUnsignedAsync<ApiKeyResponse>(
-            //    "apiKey",
-            //    new Dictionary<string, string>(5)
-            //    {
-            //        ["username"] = username,
-            //        ["password"] = password,
-            //        ["otp"] = otp,
-            //        ["allowMoveFund"] = allowMoveFund ? "1" : "0",
-            //        ["deviceId"] = deviceId,
-            //    }
-            //);
+            return await QueryPrivateUnsignedAsync<ApiKeyResponse>(
+                "apiKey",
+                new Dictionary<string, string>(5)
+                {
+                    ["username"] = username,
+                    ["password"] = password,
+                    ["otp"] = otp,
+                    ["allowMoveFund"] = allowMoveFund ? "1" : "0",
+                    ["deviceId"] = deviceId,
+                }
+            );
         }
 
         /// <summary>
         /// Create or update an api key for a user.
         /// </summary>
-        /// <param name="userUuid">User's uuid.</param>
         /// <param name="deviceId">Name of api key.  E.g., apiKey1.</param>
         /// <param name="allowMoveFund">True if user can withdraw fiat or crypto.</param>
         /// <param name="placeOrders">True if user can trade.</param>
         /// <remarks>Only allow if the authorized api key is the master key.</remarks>
         /// <returns></returns>
-        public async Task<ApiKeyResponse> CreateApiKeyAsync(Guid userUuid, string deviceId, bool allowMoveFund, bool placeOrders)
+        public async Task<ApiKeyResponse> CreateApiKeyAsync(string deviceId, bool allowMoveFund, bool placeOrders)
         {
-            throw new NotImplementedException();
+            return await QueryPrivateUnsignedAsync<ApiKeyResponse>(
+                "apiKey/create",
+                new Dictionary<string, string>(4)
+                {
+                    ["deviceId"] = deviceId,
+                    ["allowMoveFund"] = allowMoveFund ? "1" : "0",
+                    ["placeOrders"] = placeOrders ? "1" : "0",
+                }
+            );
         }
 
         /// <summary>
@@ -60,7 +67,10 @@ namespace AnxPro.Api
         /// <returns></returns>
         public async Task<DataTokenResponse> GetDataTokenAsync()
         {
-            throw new NotImplementedException();
+            return await QueryPrivateUnsignedAsync<DataTokenResponse>(
+                "apiKey/create",
+                null
+            );
         }
     }
 }
