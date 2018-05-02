@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Alert methods (create, delete, list).
 - Authentication methods (get api key, create api key, get data token).
 - Digital asset method to check address.
+- Retail trading methods (get quote, trade).
 
 ## 0.1.1 - 2018-04-30
 ### Added

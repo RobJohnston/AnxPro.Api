@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AnxPro.Api.Models;
 
@@ -21,7 +22,19 @@ namespace AnxPro.Api
             decimal tradedCurrencyAmount, decimal settlementCurrencyAmount, 
             bool buyTradedCurrency, bool isIndicativeQuote, Guid customRef)
         {
-            throw new NotImplementedException();
+            return await QueryPrivateAsync<QuoteResponseDefinition>(
+                "retail/quote",
+                new Dictionary<string, string>(7)
+                {
+                    ["tradedCurrency"] = tradedCurrency,
+                    ["settlementCurrency"] = settlementCurrency,
+                    ["tradedCurrencyAmount"] = tradedCurrencyAmount.ToString(_culture),
+                    ["settlementCurrencyAmount"] = settlementCurrencyAmount.ToString(_culture),
+                    ["buyTradedCurrency"] = buyTradedCurrency ? "1" : "0",
+                    ["isIndicativeQuote"] = isIndicativeQuote ? "1" : "0",
+                    ["customRef"] = customRef.ToString(),
+                }
+            );
         }
 
         /// <summary>
@@ -47,7 +60,15 @@ namespace AnxPro.Api
         /// </returns>
         public async Task<RetailTradeResponse> TradeAsync(string quoteId, string customRef, decimal amount)
         {
-            throw new NotImplementedException();
+            return await QueryPrivateAsync<RetailTradeResponse>(
+                "retail/trade",
+                new Dictionary<string, string>(7)
+                {
+                    ["quoteId"] = quoteId,
+                    ["customRef"] = customRef,
+                    ["amount"] = amount.ToString(_culture),
+                }
+            );
         }
     }
 }
